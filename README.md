@@ -36,7 +36,7 @@
 
 | 阶段 | 主题 | 核心学习内容 | 最终能力 |
 |---|---|---|---|
-| **01** | **AI / ML Foundations** | AI、ML、DL、Dataset、Label、Model、Training、Inference、Loss、Optimization、Validation、Generalization、Distribution Shift | 理解 AI 模型如何学习、预测以及为什么犯错 |
+| **01** | **AI 基础** | AI、ML、DL、Dataset、Label、Model、Training、Inference、Loss、Optimization、Validation、Generalization、Distribution Shift | 理解 AI 模型如何学习、预测以及为什么犯错 |
 | **02** | **Evaluation Fundamentals** | Evaluation Target、Criteria、Ground Truth、Reference、Rubric、Grader、Metric、Benchmark、Human Evaluation、LLM-as-a-Judge、Reliability、Validity | 能把“好不好”定义成可执行、可验证的 Evaluation |
 | **03** | **Evaluation Dataset Engineering** | Eval Case、Dataset Design、Sampling、Labeling、Annotation Guideline、Golden Set、Edge Case、Adversarial Case、Dataset Versioning、Data Quality | 能设计和维护真正可用于 AI Evaluation 的数据集 |
 | **04** | **Evaluation Metrics & Judge** | Rule-based Grader、Model-based Grader、LLM Judge、Pairwise Evaluation、Pointwise Evaluation、Reference-based / Reference-free、Metric Design、Judge Calibration、Inter-rater Agreement、Statistical Significance | 能设计、实现并验证 Evaluation Metric / Grader / Judge |
@@ -52,106 +52,62 @@
 
 ---
 
-# 学习依赖关系
+# 当前学习：阶段 01｜AI 基础
 
-这里有一个重要原则：**Evaluation 不是学完整个 AI 之后才开始的最后一章，而是贯穿整个路线的核心能力。**
+第一阶段是整个路线的地基。当前第一篇已经开始学习，后续文章会逐篇推进，不提前跳到大模型、RAG、Agent 或 Evaluation Engineering。
 
-Phase 01 先回答“AI 为什么会产生错误”，Phase 02 开始回答“错误和质量应该如何定义与衡量”，之后再把 Evaluation 应用到不同 AI 系统。
+**[→ 进入阶段 01｜AI 基础](./01%EF%BD%9CAI%20%E5%9F%BA%E7%A1%80/README.md)**
+
+当前学习进度：
 
 ```text
-Phase 01
-AI / ML Foundations
-   ↓
-理解 AI 如何学习、预测、犯错
-   ↓
-Phase 02
-Evaluation Fundamentals
-   ↓
-定义什么是“好”以及如何证明
-   ↓
-Phase 03
-Evaluation Dataset Engineering
-   ↓
-准备可信的评测数据
-   ↓
-Phase 04
-Evaluation Metrics & Judge
-   ↓
-建立可信的评分机制
-   ↓
-Phase 05
-LLM Foundations
-   ↓
-理解现代 LLM 的工作机制
-   ↓
-Phase 06
-LLM Evaluation
-   ↓
-Phase 07
-RAG Evaluation
-   ↓
-Phase 08
-Agent Evaluation
-   ↓
-Phase 09
-Multi-Agent Evaluation
-   ↓
-Phase 10
-AI Safety / Security Evaluation
-   ↓
-Phase 11
-Evaluation Engineering
-   ↓
-Phase 12
-Production / Continuous AI Quality
-   ↓
-Phase 13
-AI Evaluation Projects
+阶段 01｜AI 基础
+│
+├── 01｜AI、ML、DL 到底是什么？   ← 当前
+├── 02｜Dataset 到底是什么？
+├── 03｜Label / Ground Truth 到底是什么？
+├── 04｜Model 到底是什么？
+├── 05｜Prediction / Inference 是什么？
+├── 06｜Error / Loss 是什么？
+├── 07｜Optimization 是什么？
+├── 08｜Training 是怎么进行的？
+├── 09｜Validation / Test 是什么？
+├── 10｜Generalization 是什么？
+├── 11｜Distribution Shift 是什么？
+└── 12｜Data Leakage / Test Contamination 是什么？
 ```
-
-其中 Phase 02～04 是整个路线的**Evaluation 核心基础层**；Phase 06～10 是**专项 Evaluation 能力层**；Phase 11～12 是**Evaluation Engineering / Production Quality 工程层**。
 
 ---
 
-# 为什么路线不是“先把 AI 全学完，再学 Evaluation”？
-
-传统软件测试通常先有相对明确的规则和预期结果：
+# 学习依赖关系
 
 ```text
-需求
- ↓
-测试用例
- ↓
-Expected Result
- ↓
-Actual Result
- ↓
-Pass / Fail
+阶段 01｜AI 基础
+   ↓
+阶段 02｜Evaluation Fundamentals
+   ↓
+阶段 03｜Evaluation Dataset Engineering
+   ↓
+阶段 04｜Evaluation Metrics & Judge
+   ↓
+阶段 05｜LLM Foundations
+   ↓
+阶段 06｜LLM Evaluation
+   ↓
+阶段 07｜RAG Evaluation
+   ↓
+阶段 08｜Agent Evaluation
+   ↓
+阶段 09｜Multi-Agent Evaluation
+   ↓
+阶段 10｜AI Safety / Security Evaluation
+   ↓
+阶段 11｜Evaluation Engineering
+   ↓
+阶段 12｜Production / Continuous AI Quality
+   ↓
+阶段 13｜AI Evaluation Projects
 ```
-
-AI 系统不同：
-
-```text
-Input
- ↓
-AI System
- ↓
-可能存在多个合理输出
- ↓
-需要定义 Evaluation Criteria
- ↓
-Grader / Judge
- ↓
-Metric
- ↓
-Quality Decision
-```
-
-因此，AI Evaluation Engineer 不只是“理解 AI”，还必须从一开始就建立一个关键意识：
-
-> **AI 的测试问题，本质上正在从“结果是否等于标准答案”，转向“如何定义、测量并证明系统质量”。**
-
-这也是本项目为什么把 Evaluation Fundamentals 放在 AI 基础之后，而不是放到所有 AI 技术之后。
 
 ---
 
@@ -166,11 +122,7 @@ Quality Decision
    ↓
 真实案例
    ↓
-提出 Evaluation Question
-   ↓
 动手实验
-   ↓
-最小代码实现
    ↓
 产生数据
    ↓
@@ -209,76 +161,9 @@ Failure Analysis
 | 性能测试 | Latency / Token / Cost Evaluation |
 | 安全测试 | Safety / Security / Red Team Evaluation |
 
-最终不是放弃测试，而是把已有的测试工程能力迁移到**概率性、生成式、学习型系统**，并进一步建立新的 Evaluation Engineering 能力。
-
----
-
-# 当前学习：Phase 01
-
-## AI / ML Foundations
-
-第一阶段是整个路线的地基。
-
-当前只学习：
-
-**[→ 进入 Phase 01：AI / ML Foundations](./01-ai-ml-foundations/README.md)**
-
-第一阶段重点解决：
-
-```text
-AI 是什么？
-   ↓
-ML 为什么叫“学习”？
-   ↓
-数据在学习中扮演什么角色？
-   ↓
-Model 到底是什么？
-   ↓
-模型如何产生 Prediction？
-   ↓
-Prediction 为什么会错？
-   ↓
-Loss 如何衡量错误？
-   ↓
-模型如何根据错误更新参数？
-   ↓
-Training 是怎么循环起来的？
-   ↓
-如何验证模型真的学会了？
-   ↓
-什么是 Generalization？
-   ↓
-为什么真实世界会出现 Distribution Shift？
-   ↓
-为什么最终需要 Evaluation？
-```
-
-Phase 01 学完后，不要求成为算法工程师，而要求能够建立最基本的 AI Failure Analysis 能力：
-
-> **我知道 AI 的结果是如何产生的，也知道一个错误可能来自数据、标签、模型、训练、泛化或分布变化。**
-
----
-
-# 当前仓库结构
-
-```text
-ai-evaluation-engineer/
-│
-├── README.md
-│   └── 总路线 + 全阶段能力地图
-│
-└── 01-ai-ml-foundations/
-    └── README.md
-        └── 第一阶段详细学习内容
-```
-
-**当前只保留第一阶段。** 后续阶段不会提前建立文件，避免学习路线变成一堆尚未真正学习的空目录。
-
 ---
 
 # 最终能力闭环
-
-最终希望形成的不是“学过很多 AI 技术”，而是一条完整的质量工程能力链：
 
 ```text
 AI Understanding
@@ -306,11 +191,3 @@ Dataset Evolution
 Continuous Evaluation
       ↺
 ```
-
-最终能力不是：
-
-> **“我会多少 AI 工具。”**
-
-而是：
-
-> **“我能够理解 AI 系统为什么产生这个结果，设计合理的 Evaluation 判断它好不好，并把这种判断变成可重复、可自动化、可持续运行的质量工程系统。”**
