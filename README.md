@@ -1,212 +1,605 @@
 # AI Evaluation Engineer
 
-> 一条从传统软件测试出发，系统进入 AI Evaluation / AI Quality Engineering 的学习与实战路线。
+> 从传统软件测试出发，系统学习 AI Evaluation / AI Quality Engineering。
+>
+> **当前只学习第一阶段。** 其他阶段先明确路线，不提前展开。
 
-## 这个仓库解决什么问题
+## 这套学习路线解决什么问题
 
-很多 AI 学习路线从模型 API、Prompt、RAG、Agent 开始，结果是“会用 AI”，却不知道 AI 为什么会错，更不知道如何证明一个 AI 系统真的变好了。
-
-本仓库反过来学习：
-
-```text
-理解 AI
-  ↓
-理解模型如何学习与产生行为
-  ↓
-理解 LLM 与 AI System
-  ↓
-定义“什么叫好”
-  ↓
-构造 Evaluation Dataset
-  ↓
-设计 Grader
-  ↓
-重复实验 + Metrics + Statistics
-  ↓
-Failure Analysis
-  ↓
-Regression
-  ↓
-Production Evaluation
-  ↓
-AI Quality Engineering
-```
-
-核心目标不是培养算法研究员，而是培养能够回答下面问题的工程师：
-
-- AI 为什么会错？
-- 错误来自数据、模型、Prompt、Context、Retrieval、Tool、Memory 还是 Agent Loop？
-- 什么才是正确答案？
-- 如何构造可信的 Eval Dataset？
-- 如何选择 Grader？
-- 一次结果是否可信？是否需要重复 Trial？
-- 指标变化是真提升还是随机波动？
-- 如何把离线评估变成持续 Regression？
-- 如何把模型质量连接到线上业务质量？
-
-## 核心认知
-
-传统软件测试：
+传统软件测试主要验证：
 
 ```text
 需求 → 规则 → 代码 → 确定性行为 → Expected / Actual → Pass / Fail
 ```
 
-AI 系统：
+AI 系统的核心链路则是：
 
 ```text
-Data / Model / Prompt / Context / Tools
-              ↓
-          AI Behavior
-              ↓
-       Outcome + Trace
-              ↓
-      Grader / Metrics
-              ↓
- Statistical Evidence + Failure Analysis
-              ↓
-        Regression / Production
+Data → Model → Training → Inference → Behavior → Evaluation
 ```
 
-所以 AI Evaluation 不是“给 Prompt 写测试用例”，而是**用数据、实验、评估器和统计证据研究 AI 系统行为**。
+因此，AI Evaluation Engineer 不能只停留在：
 
-## 学习路线
+- 会调用模型 API
+- 会写 Prompt
+- 会做功能测试
 
-| 阶段 | 模块 | 目标 |
+而需要逐步理解：
+
+```text
+AI 为什么能做这件事？
+        ↓
+模型为什么会产生这个结果？
+        ↓
+为什么会错？
+        ↓
+怎么证明它变好了？
+        ↓
+怎么持续验证？
+```
+
+---
+
+# 学习总路线
+
+整个路线分为 **9 个阶段**。现在只打开第一阶段，后续阶段按顺序学习。
+
+| 阶段 | 学习主题 | 这一阶段要解决的问题 |
 |---|---|---|
-| 01 | [AI / ML Foundations](01-ai-ml-foundations/) | 建立模型学习与泛化的因果认知 |
-| 02 | [LLM Foundations](02-llm-foundations/) | 理解 Token、Embedding、Transformer、Inference |
-| 03 | [Evaluation Foundations](03-evaluation-foundations/) | 学会定义 Target、Dataset、Grader、Metric |
-| 04 | [LLM Evaluation](04-llm-evaluation/) | 评估正确性、事实性、鲁棒性、一致性等 |
-| 05 | [RAG Evaluation](05-rag-evaluation/) | 分层评估 Retrieval / Context / Generation |
-| 06 | [Agent Evaluation](06-agent-evaluation/) | 评估 Planning、Tool、Trajectory、Recovery、Outcome |
-| 07 | [Safety / Multimodal / Reliability](07-safety-multimodal-reliability/) | 扩展到安全、多模态和可靠性 |
-| 08 | [Evaluation Engineering](08-evaluation-engineering/) | 把评估变成可运行的软件工程系统 |
-| 09 | [Production AI Quality](09-production-ai-quality/) | Drift、Online Eval、Regression、业务质量 |
+| **01** | **AI / ML 基础** | AI、ML、DL 到底是什么？模型如何从数据中学习？为什么会犯错？ |
+| **02** | **LLM 基础** | Token、Embedding、Transformer、Attention、LLM 到底是什么？ |
+| **03** | **LLM Inference & Behavior** | 模型如何生成答案？Context、Decoding、Temperature、Top-p 如何影响结果？为什么同一个问题可能得到不同答案？ |
+| **04** | **LLM Reasoning & AI System** | 推理、Planning、Reflection、Context Management，以及一个 LLM 应用是如何工作的？ |
+| **05** | **RAG & Agent** | Retrieval、Tool Use、Function Calling、Memory、Trajectory、Agent Loop、Long Horizon 是什么？ |
+| **06** | **AI Evaluation** | 什么叫“好”？如何设计 Dataset、Ground Truth、Grader、Metric 和 Evaluation？ |
+| **07** | **专项 Evaluation** | LLM、RAG、Agent、多模态、安全、可靠性分别怎么评测？ |
+| **08** | **Evaluation Engineering** | 如何把评测做成 Dataset、Runner、Grader、Report、Regression 等工程系统？ |
+| **09** | **Production AI Quality** | 如何进行线上评测、质量监控、Drift、Regression、业务指标关联和持续质量治理？ |
 
-## 每个模块怎么学
-
-每个模块都遵循同一闭环：
+最终形成：
 
 ```text
-Concept
-  ↓
-Why it matters
-  ↓
-Concrete example
-  ↓
-Experiment
-  ↓
-Implementation
-  ↓
+AI / ML 基础
+    ↓
+LLM 基础
+    ↓
+Inference / Behavior
+    ↓
+Reasoning / AI System
+    ↓
+RAG / Agent
+    ↓
 Evaluation
-  ↓
-Failure analysis
-  ↓
-Review
+    ↓
+Evaluation Engineering
+    ↓
+Production AI Quality
 ```
 
-不追求“看过很多概念”，而追求每一章结束后都能留下：**一个能解释的模型、一个能运行的实验、一个能验证的结论。**
+---
 
-## 第一阶段：先把 AI 学明白
+# Phase 01：AI / ML 基础
 
-第一章不会直接跳到 Transformer 公式、RAG 或 Agent，而是先回答：
+## 这一阶段的目标
+
+这一阶段**不是学算法，也不是为了成为机器学习算法工程师**。
+
+目标只有一个：
+
+> **真正理解“模型是如何学习、如何产生预测、为什么会犯错，以及为什么需要 Evaluation”。**
+
+你需要把传统测试工程师的思维从：
 
 ```text
-AI 是什么？
-ML 为什么叫“学习”？
-Dataset 在学习中做什么？
-Model 到底是什么？
-Prediction 为什么会错？
-Loss 为什么能让模型改变？
-Training 到底发生了什么？
-为什么训练得越好，真实任务不一定越好？
+输入 → 代码 → 输出 → 判断对错
 ```
 
-第一章的主线：
+升级成：
+
+```text
+数据
+ ↓
+模型
+ ↓
+训练
+ ↓
+预测
+ ↓
+误差
+ ↓
+参数更新
+ ↓
+再次训练
+ ↓
+验证 / 测试
+ ↓
+泛化
+ ↓
+评估
+```
+
+---
+
+## 01. AI、ML、DL 到底是什么
+
+先建立最基本的概念关系：
 
 ```text
 AI
- ↓
-ML
- ↓
-Dataset + Label
- ↓
+└── Machine Learning
+    └── Deep Learning
+        └── Neural Network
+```
+
+需要理解：
+
+- AI 是什么
+- Machine Learning 是什么
+- Deep Learning 是什么
+- Neural Network 是什么
+- 规则系统与机器学习有什么本质区别
+- 为什么机器学习不是简单的“写更多 if/else”
+
+### 学完要能回答
+
+> 如果一个系统以前靠人工写规则判断垃圾短信，现在改成模型根据历史数据自动判断，这个“学习”到底发生在哪里？
+
+---
+
+## 02. Dataset：模型到底从什么东西学习
+
+理解机器学习之前，先理解 **Data**。
+
+重点学习：
+
+- Dataset
+- Sample
+- Feature
+- Label
+- Training Set
+- Validation Set
+- Test Set
+- 数据分布
+- 数据质量
+- 数据偏差
+
+建立最简单的认知：
+
+```text
+Dataset
+   ↓
+输入 X + 正确答案 Y
+   ↓
+模型学习 X 与 Y 之间的关系
+```
+
+例如：
+
+```text
+输入：恭喜中奖100万
+Label：垃圾
+```
+
+这里真正重要的不是这句话，而是：
+
+> **模型为什么需要大量这样的“输入 + 正确答案”？**
+
+---
+
+## 03. Model：模型到底是什么
+
+不要把 Model 理解成一个黑盒 API。
+
+需要理解：
+
+- Model 是什么
+- Parameter 是什么
+- Feature 与 Parameter 的区别
+- 模型为什么可以表示复杂关系
+- 模型为什么不是一套固定业务规则
+- 模型输入、模型内部状态、模型输出之间的关系
+
+建立这个核心认知：
+
+```text
+Input
+  ↓
 Model
- ↓
+  ↓
 Prediction
- ↓
-Loss / Error
- ↓
+```
+
+模型本质上是在学习一个从输入到输出的映射。
+
+---
+
+## 04. Prediction：模型为什么会预测错
+
+开始真正理解 AI 的“不确定性”。
+
+例如：
+
+```text
+输入：恭喜中奖100万
+
+模型预测：
+正常 60%
+垃圾 40%
+```
+
+正确答案：
+
+```text
+垃圾
+```
+
+于是出现：
+
+```text
+Prediction ≠ Label
+```
+
+需要理解：
+
+- Prediction
+- Probability / Score
+- Classification
+- Regression
+- Error
+- Incorrect Prediction
+
+这里要建立一个非常重要的测试认知：
+
+> **AI 的错误不是传统程序那种简单的“代码执行错了”，而是模型对输入做出了错误判断。**
+
+---
+
+## 05. Loss / Error：模型怎么知道自己错了
+
+这是第一阶段最关键的知识之一。
+
+理解：
+
+```text
+Prediction
+    ↓
+与正确答案比较
+    ↓
+Error / Loss
+```
+
+例如：
+
+```text
+正确答案 = 垃圾
+模型预测 = 正常 60% / 垃圾 40%
+                ↓
+              Loss
+```
+
+需要理解：
+
+- Error
+- Loss
+- 为什么需要 Loss Function
+- Loss 大意味着什么
+- Loss 小意味着什么
+- 为什么 Loss 能用于训练模型
+
+暂时**不要求深入数学推导**，先搞懂因果关系。
+
+---
+
+## 06. Parameter Update：模型到底怎么“学会”
+
+这是理解 Machine Learning 的核心。
+
+完整过程：
+
+```text
+输入数据
+  ↓
+模型预测
+  ↓
+计算 Loss
+  ↓
+根据 Loss 调整 Parameters
+  ↓
+再次预测
+  ↓
+再次计算 Loss
+  ↓
+继续调整
+```
+
+这就是“学习”的核心过程。
+
+需要知道这些词是什么意思：
+
+- Parameter
+- Optimization
+- Gradient
+- Gradient Descent
+- Learning Rate
+- Backpropagation
+
+第一阶段只要求建立**概念级因果链**，不是马上手算梯度。
+
+---
+
+## 07. Training：模型是怎么训练出来的
+
+把前面的知识串起来：
+
+```text
+Dataset
+   ↓
+Training
+   ↓
+Prediction
+   ↓
+Loss
+   ↓
 Parameter Update
- ↓
+   ↓
 Training Loop
- ↓
+   ↓
+Better Model
+```
+
+需要理解：
+
+- Training 是什么
+- Batch
+- Epoch
+- Training Loop
+- Optimization
+- 为什么训练不是“一次完成”
+- 为什么模型训练时间可能非常长
+
+最终能够解释：
+
+> 一个模型从数据到能够进行预测，中间到底发生了什么？
+
+---
+
+## 08. Validation / Test：模型训练得好就代表好了吗
+
+这里正式进入**测试工程师最应该关注的问题**。
+
+模型可能出现：
+
+```text
+训练数据表现很好
+        ↓
+真实数据表现很差
+```
+
+需要理解：
+
+- Training Set
+- Validation Set
+- Test Set
+- 为什么不能只看 Training Loss
+- 为什么需要独立 Test Set
+- 什么叫 Generalization
+
+核心问题：
+
+> **模型是在“学习规律”，还是只是“记住了训练数据”？**
+
+---
+
+## 09. Generalization：为什么模型学会了却不会做
+
+理解机器学习最重要的现象之一：
+
+```text
+训练数据
+  ↓
+模型表现很好
+
+新数据
+  ↓
+模型表现变差
+```
+
+重点理解：
+
+- Generalization
+- Overfitting
+- Underfitting
+- Bias / Variance 的基本概念
+- 为什么训练集高分不代表真实世界高质量
+
+这会直接连接到以后学习的：
+
+```text
+LLM Evaluation
+RAG Evaluation
+Agent Evaluation
+Production AI Quality
+```
+
+---
+
+## 10. Distribution Shift：真实世界为什么会让模型失效
+
+训练数据和真实世界的数据可能不同：
+
+```text
+Training Distribution
+        ↓
+      Model
+        ↓
+Real-world Distribution
+```
+
+需要理解：
+
+- Distribution
+- Distribution Shift
+- Data Drift
+- Concept Drift 的基本概念
+- 为什么线上模型可能越来越差
+
+这是以后学习 **Production AI Quality** 的基础。
+
+---
+
+## 11. Data Leakage / Test Contamination：为什么测试结果可能是假的
+
+需要理解两个重要问题：
+
+### Data Leakage
+
+测试信息不应该提前进入训练过程，却被模型间接获得。
+
+### Test Contamination
+
+模型在训练或其他过程中已经接触过测试内容，导致测试结果虚高。
+
+核心认知：
+
+> **测试数据不再独立，Evaluation 就可能失去可信度。**
+
+这会直接连接到后面的 Evaluation Dataset 设计。
+
+---
+
+## 12. 从 Machine Learning 走向 Evaluation
+
+第一阶段最后把所有知识串起来：
+
+```text
+Dataset
+   ↓
+Model
+   ↓
+Training
+   ↓
+Inference / Prediction
+   ↓
+Error
+   ↓
+Loss
+   ↓
+Parameter Update
+   ↓
+Better Model
+   ↓
 Validation / Test
- ↓
+   ↓
 Generalization
- ↓
-Distribution Shift / Leakage / Contamination
- ↓
-为什么需要 Evaluation
+   ↓
+Distribution Shift
+   ↓
+Evaluation
 ```
 
-## 能力地图
+最终要理解一个非常重要的问题：
 
-完整能力地图见 [`roadmap/capability-map.md`](roadmap/capability-map.md)。
+> **为什么 AI 系统不能只说“能运行”，而必须讨论“质量”？**
 
-路线不是按“热门技术名词”堆砌，而按**认知依赖关系**组织：先理解 AI，再理解 AI System，再学习 Evaluation，最后进入工程化与生产质量。
-
-## 学习进度
-
-见 [`roadmap/learning-progress.md`](roadmap/learning-progress.md)。
-
-进度只记录真正完成的内容：理解、实验、代码、评估、复盘，而不是简单打勾。
-
-## 适合谁
-
-- 传统软件测试工程师
-- AI Test / AI Evaluation Engineer
-- LLM / RAG / Agent Quality Engineer
-- 希望从“测试功能”升级到“评估 AI 系统”的工程师
-
-## 不以什么为目标
-
-- 不以训练大模型为主线
-- 不以刷 Prompt 技巧为主线
-- 不要求一开始掌握复杂数学推导
-- 不把“会调用 API”当成 AI 工程能力
-
-## 最终目标
-
-最终希望形成这样的能力链：
+因为 AI 的核心不是：
 
 ```text
-Tester
-  ↓
-AI-aware Tester
-  ↓
-AI Evaluation Engineer
-  ↓
-Evaluation Engineer
-  ↓
-AI Quality Engineer
+能不能执行
 ```
 
-并能独立完成：
+而是：
 
 ```text
-定义质量目标
-→ 设计 Dataset
-→ 设计 Grader
-→ 执行 Evaluation
-→ 统计结果
-→ 分析失败
-→ 定位根因
-→ 建立 Regression
-→ 监控线上质量
+结果是否正确？
+是否稳定？
+是否能泛化？
+在什么数据上会失败？
+失败概率是多少？
 ```
 
-## License
+这就是从**传统软件测试**进入 **AI Evaluation** 的第一座桥梁。
 
-MIT
+---
+
+# Phase 01 学习完成标准
+
+完成第一阶段后，不要求你会训练大型模型，但必须能够不用背稿解释清楚：
+
+1. AI、ML、DL 分别是什么。
+2. Dataset、Label、Model、Parameter 分别是什么。
+3. 模型为什么需要 Training。
+4. Prediction 为什么会错。
+5. Loss 为什么能够帮助模型学习。
+6. Parameter Update 在做什么。
+7. Training Loop 是什么。
+8. Training / Validation / Test 有什么区别。
+9. 什么是 Generalization。
+10. 什么是 Overfitting。
+11. 什么是 Distribution Shift。
+12. 为什么 Data Leakage / Test Contamination 会让评测结果失真。
+13. 为什么 AI 系统最终必须进入 Evaluation。
+
+如果这些问题还不能用自己的话讲清楚，**就不要进入 Phase 02。**
+
+---
+
+# 后续阶段怎么进入
+
+当前只学习：
+
+```text
+Phase 01
+AI / ML 基础
+```
+
+之后按照这个顺序继续：
+
+```text
+Phase 01  AI / ML 基础
+   ↓
+Phase 02  LLM 基础
+   ↓
+Phase 03  LLM Inference & Behavior
+   ↓
+Phase 04  LLM Reasoning & AI System
+   ↓
+Phase 05  RAG & Agent
+   ↓
+Phase 06  AI Evaluation
+   ↓
+Phase 07  专项 Evaluation
+   ↓
+Phase 08  Evaluation Engineering
+   ↓
+Phase 09  Production AI Quality
+```
+
+**现在不展开后面的课程，只保留路线。学习完成 Phase 01 后，再进入 Phase 02。**
+
+---
+
+## 学习原则
+
+每一个阶段都不采用“看概念 → 打勾”的方式，而采用：
+
+```text
+理解概念
+  ↓
+理解为什么存在
+  ↓
+看具体例子
+  ↓
+自己做实验
+  ↓
+观察结果
+  ↓
+解释结果
+  ↓
+分析失败
+  ↓
+形成自己的认知
+```
+
+最终目标不是“知道 AI 有哪些名词”，而是能够站在测试工程师的角度回答：
+
+> **AI 系统为什么这样工作？为什么会失败？我如何用工程和数据证明它到底好不好？**
