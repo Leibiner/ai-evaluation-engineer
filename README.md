@@ -1,6 +1,8 @@
 # AI Evaluation Engineer
 
 > 从传统软件测试出发，系统学习 AI Evaluation / AI Quality Engineering。
+>
+> 本项目又名 **《AI 测试进阶课》**。仓库统一用 `AI Evaluation Engineer` 作为英文/正式名，文章系列标题沿用《AI 测试进阶课》。
 
 ## 项目定位
 
@@ -56,7 +58,7 @@
 
 第一阶段是整个路线的地基。当前第一篇已经开始学习，后续文章会逐篇推进，不提前跳到大模型、RAG、Agent 或 Evaluation Engineering。
 
-**[→ 进入阶段 01｜AI 基础](./01%EF%BD%9CAI%20%E5%9F%BA%E7%A1%80/README.md)**
+**[→ 进入阶段 01｜AI 基础](./01｜AI 基础/README.md)**
 
 当前学习进度：
 

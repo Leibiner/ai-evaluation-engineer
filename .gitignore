@@ -1,0 +1,74 @@
+# === 学习笔记仓库特定 ===
+# 临时实验代码(每篇配套的最小代码,体积大、一次性的)
+_sandbox/
+
+# 长期参考资料(_notes/)由 git 跟踪,但不在 Claude 默认上下文里加载
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+.coverage
+htmlcov/
+.tox/
+
+# === 机器学习 / 数据科学 ===
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.joblib
+*.pt
+*.pth
+*.onnx
+.ipynb_checkpoints/
+
+# === Jupyter ===
+*.ipynb_checkpoints/
+
+# === 数据集(体积大,不要提交) ===
+data/raw/
+data/external/
+*.csv
+*.tsv
+*.parquet
+*.arrow
+!01｜AI 基础/**/*.csv
+
+# === 编辑器 / IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# === 系统文件 ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === 环境配置 ===
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+API_KEYS*
+
+# === 日志 / 临时文件 ===
+*.log
+*.tmp
+*.bak
+*.swp
